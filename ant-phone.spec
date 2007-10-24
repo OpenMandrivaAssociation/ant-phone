@@ -1,9 +1,9 @@
 %define name	ant-phone
-%define version	0.1.12
-%define release %mkrel 2
+%define version	0.1.13
+%define release %mkrel 1
 
 Name: 	 	%{name}
-Summary:	Desktop ISDN telephony application 	
+Summary:	Desktop ISDN telephony application
 Version: 	%{version}
 Release: 	%{release}
 
@@ -12,10 +12,10 @@ URL:		http://www.antcom.de/
 License:	GPL
 Group:		Communications
 BuildRoot:	%{_tmppath}/%{name}-buildroot
-BuildRequires:	pkgconfig 
-BuildRequires:  gettext 
-BuildRequires:  flex 
-BuildRequires:  bison 
+BuildRequires:	pkgconfig
+BuildRequires:  gettext
+BuildRequires:  flex
+BuildRequires:  bison
 BuildRequires:  gtk+2-devel
 BuildRequires:	libsndfile-devel
 
@@ -33,7 +33,7 @@ and a full duplex soundcard or two sound devices.
 %build
 %configure2_5x
 %make
-										
+
 %install
 rm -rf $RPM_BUILD_ROOT
 %makeinstall
@@ -55,7 +55,7 @@ cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=ANT-phone
 Comment=ISDN Telephone
-Exec=%{_bindir}/%{name} 
+Exec=%{_bindir}/%{name}
 Icon=communications_phone_section
 Terminal=false
 Type=Application
@@ -69,7 +69,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %update_menus
-		
+
 %postun
 %clean_menus
 
