@@ -11,7 +11,6 @@ Source:		http://www.antcom.de/ant-phone/download/%{name}-%{version}.tar.bz2
 URL:		http://www.antcom.de/
 License:	GPL
 Group:		Communications
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	pkgconfig
 BuildRequires:  gettext
 BuildRequires:  flex
