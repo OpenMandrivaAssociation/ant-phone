@@ -39,16 +39,6 @@ rm -rf $RPM_BUILD_ROOT
 %makeinstall
 
 #menu
-mkdir -p $RPM_BUILD_ROOT%{_menudir}
-cat << EOF > $RPM_BUILD_ROOT%{_menudir}/%{name}
-?package(%{name}): command="%{name}" \
-icon="communications_phone_section.png" \
-needs="x11" \
-title="ANT-phone" \
-longtitle="ISDN Telephone" \
-section="Office/Communications/Phone" \
-xdg="true"
-EOF
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
@@ -78,6 +68,5 @@ rm -rf $RPM_BUILD_ROOT
 %doc ABOUT-NLS README AUTHORS ChangeLog TODO COPYING
 %{_bindir}/%name
 %{_mandir}/man1/%name.1.*
-%{_menudir}/%name
 %{_datadir}/applications/mandriva-%{name}.desktop
 
