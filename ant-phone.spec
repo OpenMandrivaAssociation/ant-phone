@@ -1,15 +1,16 @@
 %define name	ant-phone
-%define version	0.1.13
-%define release %mkrel 2
+%define version	0.2.1
+%define release %mkrel 1
 
 Name: 	 	%{name}
 Summary:	Desktop ISDN telephony application
 Version: 	%{version}
 Release: 	%{release}
 
-Source:		http://www.antcom.de/ant-phone/download/%{name}-%{version}.tar.bz2
-URL:		http://www.antcom.de/
-License:	GPL
+Source:		http://download.savannah.gnu.org/releases/%{name}/%{name}-%{version}.tar.gz
+Patch0:		ant-phone-0.2.1-linking.patch
+URL:		http://www.nongnu.org/ant-phone/
+License:	GPLv2
 Group:		Communications
 BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	pkgconfig
@@ -18,59 +19,49 @@ BuildRequires:  flex
 BuildRequires:  bison
 BuildRequires:  gtk+2-devel
 BuildRequires:	libsndfile-devel
+Requires:	desktop-common-data
 
 %description
 ANT is a desktop ISDN telephony application written for GNU/Linux. It supports
 OSS (Open Sound System) and I4L (ISDN4Linux).  It directly interfaces OSS and
 ISDN devices, so there is no need to install extra software or hardware like
 PBX (Private Branch Exchange) or telephony cards, if you've got direct access
-to an audio capable ISDN card (teles or HiSax chipset, e.g. AVM Fritz Card)
-and a full duplex soundcard or two sound devices.
+to an audio capable ISDN card (teles or HiSax chip-set, e.g. AVM Fritz Card)
+and a full duplex sound card or two sound devices.
 
 %prep
 %setup -q
+%patch0 -p0 -b .linking
 
 %build
-%configure2_5x
+%configure2_5x --disable-rpath
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
-%makeinstall
+rm -rf %{buildroot}
+%makeinstall_std
 
 #menu
-
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
+mkdir -p %{buildroot}%{_datadir}/applications
+cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=ANT-phone
 Comment=ISDN Telephone
-Exec=%{_bindir}/%{name}
+Exec=%{name}
 Icon=communications_phone_section
 Terminal=false
 Type=Application
 Categories=GNOME;GTK;X-MandrivaLinux-Office-Communications-Phone;Network;Telephony;
 EOF
 
-%find_lang %name
+%find_lang %{name}
 
 %clean
-rm -rf $RPM_BUILD_ROOT
-
-%if %mdkversion < 200900
-%post
-%update_menus
-%endif
-
-%if %mdkversion < 200900
-%postun
-%clean_menus
-%endif
+rm -rf %{buildroot}
 
 %files -f %{name}.lang
 %defattr(-,root,root)
-%doc ABOUT-NLS README AUTHORS ChangeLog TODO COPYING
-%{_bindir}/%name
-%{_mandir}/man1/%name.1.*
+%doc README AUTHORS ChangeLog TODO
+%{_bindir}/%{name}
+%{_mandir}/man1/%{name}.*
 %{_datadir}/applications/mandriva-%{name}.desktop
-
