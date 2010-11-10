@@ -20,6 +20,7 @@ BuildRequires:  bison
 BuildRequires:  gtk+2-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	alsa-lib-devel
+BuildRequires:	isdn4k-utils-devel
 Requires:	desktop-common-data
 
 %description
