@@ -1,0 +1,21 @@
+diff -p -up ./src/Makefile.in.orig ./src/Makefile.in
+--- ./src/Makefile.in.orig	2008-02-04 21:21:42.000000000 +0100
++++ ./src/Makefile.in	2010-11-10 15:17:20.000000000 +0100
+@@ -65,7 +65,7 @@ am__depfiles_maybe = depfiles
+ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+ 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+ CCLD = $(CC)
+-LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
++LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) -o $@
+ LEXCOMPILE = $(LEX) $(LFLAGS) $(AM_LFLAGS)
+ YLWRAP = $(top_srcdir)/ylwrap
+ YACCCOMPILE = $(YACC) $(YFLAGS) $(AM_YFLAGS)
+@@ -358,7 +358,7 @@ isdnparser.h: isdnparser.c
+ 	else :; fi
+ ant-phone$(EXEEXT): $(ant_phone_OBJECTS) $(ant_phone_DEPENDENCIES) 
+ 	@rm -f ant-phone$(EXEEXT)
+-	$(LINK) $(ant_phone_OBJECTS) $(ant_phone_LDADD) $(LIBS)
++	$(LINK) $(LDFLAGS) $(ant_phone_OBJECTS) $(ant_phone_LDADD) $(AM_LDFLAGS) $(LIBS)
+ 
+ mostlyclean-compile:
+ 	-rm -f *.$(OBJEXT)
