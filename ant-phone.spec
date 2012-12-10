@@ -7,19 +7,18 @@ Summary:	Desktop ISDN telephony application
 Version: 	%{version}
 Release: 	%{release}
 
-Source:		http://download.savannah.gnu.org/releases/%{name}/%{name}-%{version}.tar.gz
+Source0:	http://download.savannah.gnu.org/releases/%{name}/%{name}-%{version}.tar.gz
 Patch0:		ant-phone-0.2.1-linking.patch
 URL:		http://www.nongnu.org/ant-phone/
 License:	GPLv2
 Group:		Communications
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	pkgconfig
 BuildRequires:  gettext
 BuildRequires:  flex
 BuildRequires:  bison
-BuildRequires:  gtk+2-devel
-BuildRequires:	libsndfile-devel
-BuildRequires:	alsa-lib-devel
+BuildRequires:  pkgconfig(gtk+-2.0)
+BuildRequires:	pkgconfig(sndfile)
+BuildRequires:	alsa-oss-devel
 BuildRequires:	isdn4k-utils-devel
 Requires:	desktop-common-data
 
@@ -40,7 +39,6 @@ and a full duplex sound card or two sound devices.
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
 #menu
@@ -58,11 +56,7 @@ EOF
 
 %find_lang %{name}
 
-%clean
-rm -rf %{buildroot}
-
 %files -f %{name}.lang
-%defattr(-,root,root)
 %doc README AUTHORS ChangeLog TODO
 %{_bindir}/%{name}
 %{_mandir}/man1/%{name}.*
