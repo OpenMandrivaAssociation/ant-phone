@@ -1,6 +1,6 @@
 %define name	ant-phone
 %define version	0.2.1
-%define release %mkrel 1
+%define release 2
 
 Name: 	 	%{name}
 Summary:	Desktop ISDN telephony application
