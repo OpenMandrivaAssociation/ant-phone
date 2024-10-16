@@ -9,7 +9,7 @@ Release: 	%{release}
 
 Source0:	http://download.savannah.gnu.org/releases/%{name}/%{name}-%{version}.tar.gz
 Patch0:		ant-phone-0.2.1-linking.patch
-URL:		http://www.nongnu.org/ant-phone/
+URL:		https://www.nongnu.org/ant-phone/
 License:	GPLv2
 Group:		Communications
 BuildRequires:	pkgconfig
